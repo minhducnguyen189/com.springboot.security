@@ -1,0 +1,8 @@
+
+server:
+  port: 9090
+
+basic:
+  auth:
+    token: bWluaGR1Y0BnbWFpbC5jb206MTIzNDU2
+    role: ADMIN
