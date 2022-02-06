@@ -11,6 +11,7 @@
     <modules>
         <module>custom-basic-auth-database-app</module>
         <module>custom-basic-auth-token-app</module>
+        <module>custom-basic-auth-filter-app</module>
     </modules>
 
     <properties>
