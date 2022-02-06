@@ -4,5 +4,11 @@ server:
 
 basic:
   auth:
-    token: bWluaGR1Y0BnbWFpbC5jb206MTIzNDU2
-    role: ADMIN
+    tokens:
+      -
+        token: bWluaGR1Y0BnbWFpbC5jb206MTIzNDU2
+        roles:
+          - ADMIN
+      - token: bWluaGR1YzFAZ21haWwuY29tOjEyMzQ1Ng==
+        roles:
+          - USER

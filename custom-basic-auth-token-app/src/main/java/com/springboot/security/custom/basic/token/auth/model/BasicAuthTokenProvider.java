@@ -6,10 +6,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class BasicAuthToken {
+public class BasicAuthTokenProvider {
 
-    private String token;
-    private List<Role> roles;
-
+    private List<BasicAuthToken> tokens;
 
 }

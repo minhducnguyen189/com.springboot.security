@@ -1,5 +1,6 @@
 package com.springboot.security.custom.basic.token.auth.config;
 
+import com.springboot.security.custom.basic.token.auth.model.BasicAuthTokenProvider;
 import com.springboot.security.custom.basic.token.auth.model.BasicAuthToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,15 +20,16 @@ import java.util.List;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private BasicAuthToken basicAuthToken;
+    private BasicAuthTokenProvider basicAuthTokenProvider;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
-        if (this.checkUsernamePassword(email, password)) {
+        BasicAuthToken basicAuthToken = this.getBasicAuthToken(email);
+        if (this.checkUsernamePassword(email, password, basicAuthToken)) {
             List<GrantedAuthority> authorityList = new ArrayList<>();
-            authorityList.add(new SimpleGrantedAuthority(basicAuthToken.getRole().toString()));
+            basicAuthToken.getRoles().forEach(r -> authorityList.add(new SimpleGrantedAuthority(r.toString())));
             return new UsernamePasswordAuthenticationToken(email, password, authorityList);
         }
         return null;
@@ -38,11 +40,23 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 
-    private boolean checkUsernamePassword(String email, String password) {
-        String plainToken = new String(Base64.getDecoder().decode(basicAuthToken.getToken().getBytes(StandardCharsets.UTF_8)));
-        String tokenUsername = this.tokenAuthStringHandler(plainToken)[0];
-        String tokenPassword = this.tokenAuthStringHandler(plainToken)[1];
-        return tokenUsername.equals(email) && tokenPassword.equals(password);
+    private BasicAuthToken getBasicAuthToken(String email) {
+        return this.basicAuthTokenProvider.getTokens()
+                .stream()
+                .filter(t -> this.tokenAuthStringHandler(this.getPlainToken(t.getToken()))[0].equals(email))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Input email not found!"));
+    }
+
+    private boolean checkUsernamePassword(String email, String password, BasicAuthToken basicAuthToken) {
+            String plainToken = this.getPlainToken(basicAuthToken.getToken());
+            String tokenUsername = this.tokenAuthStringHandler(plainToken)[0];
+            String tokenPassword = this.tokenAuthStringHandler(plainToken)[1];
+            return tokenUsername.equals(email) && tokenPassword.equals(password);
+    }
+
+    private String getPlainToken(String token) {
+        return new String(Base64.getDecoder().decode(token.getBytes(StandardCharsets.UTF_8)));
     }
 
     private String[] tokenAuthStringHandler(String plainToken) {
