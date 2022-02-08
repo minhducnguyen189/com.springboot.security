@@ -1,6 +1,7 @@
 package com.springboot.security.custom.basic.filter.auth.filter;
 
 import com.springboot.security.custom.basic.filter.auth.model.BasicAuthToken;
+import com.springboot.security.custom.basic.filter.auth.model.BasicAuthTokenProvider;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,16 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Collections;
 import java.util.List;
 
 @Component
 public class CustomBasicAuthFilter extends HttpFilter {
 
     @Autowired
-    private BasicAuthToken basicAuthToken;
+    private BasicAuthTokenProvider basicAuthTokenProvider;
 
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
@@ -36,8 +36,10 @@ public class CustomBasicAuthFilter extends HttpFilter {
             String plainToken = new String(Base64.getDecoder().decode(decodedBasicAuth));
             String username = this.tokenAuthStringHandler(plainToken)[0];
             String password = this.tokenAuthStringHandler(plainToken)[1];
-            if (this.checkUsernamePassword(username, password)) {
-                List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(basicAuthToken.getRole().toString()));
+            BasicAuthToken basicAuthToken = this.getBasicAuthToken(username);
+            if (this.checkUsernamePassword(username, password, basicAuthToken)) {
+                List<GrantedAuthority> authorities = new ArrayList<>();
+                basicAuthToken.getRoles().forEach(r -> authorities.add(new SimpleGrantedAuthority(r.toString())));
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, password, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
@@ -48,11 +50,23 @@ public class CustomBasicAuthFilter extends HttpFilter {
         filterChain.doFilter(request, response);
     }
 
-    private boolean checkUsernamePassword(String email, String password) {
-        String plainToken = new String(Base64.getDecoder().decode(basicAuthToken.getToken().getBytes(StandardCharsets.UTF_8)));
+    private BasicAuthToken getBasicAuthToken(String email) {
+        return this.basicAuthTokenProvider.getTokens()
+                .stream()
+                .filter(t -> this.tokenAuthStringHandler(this.getPlainToken(t.getToken()))[0].equals(email))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Input email not found!"));
+    }
+
+    private boolean checkUsernamePassword(String email, String password, BasicAuthToken basicAuthToken) {
+        String plainToken = this.getPlainToken(basicAuthToken.getToken());
         String tokenUsername = this.tokenAuthStringHandler(plainToken)[0];
         String tokenPassword = this.tokenAuthStringHandler(plainToken)[1];
         return tokenUsername.equals(email) && tokenPassword.equals(password);
+    }
+
+    private String getPlainToken(String token) {
+        return new String(Base64.getDecoder().decode(token.getBytes(StandardCharsets.UTF_8)));
     }
 
     private String[] tokenAuthStringHandler(String plainToken) {
