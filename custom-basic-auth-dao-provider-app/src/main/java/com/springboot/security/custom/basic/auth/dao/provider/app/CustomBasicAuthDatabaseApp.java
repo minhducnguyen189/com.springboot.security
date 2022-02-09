@@ -1,4 +1,4 @@
-package com.springboot.security.custom.basic.auth;
+package com.springboot.security.custom.basic.auth.dao.provider.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

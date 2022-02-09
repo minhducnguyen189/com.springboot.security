@@ -1,4 +1,4 @@
-package com.springboot.security.custom.basic.auth.controller;
+package com.springboot.security.custom.basic.auth.dao.provider.app.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

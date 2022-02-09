@@ -1,7 +1,7 @@
-package com.springboot.security.custom.basic.auth.controller;
+package com.springboot.security.custom.basic.auth.dao.provider.app.controller;
 
-import com.springboot.security.custom.basic.auth.model.UserDto;
-import com.springboot.security.custom.basic.auth.service.UserService;
+import com.springboot.security.custom.basic.auth.dao.provider.app.model.UserDto;
+import com.springboot.security.custom.basic.auth.dao.provider.app.service.UserServiceHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceHandler userService;
 
     @RequestMapping(method = RequestMethod.POST, path = "/v1/auth/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UUID> createUser(@RequestBody UserDto userDto) {

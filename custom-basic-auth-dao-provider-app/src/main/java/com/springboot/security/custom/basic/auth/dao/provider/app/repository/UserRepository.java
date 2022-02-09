@@ -1,6 +1,6 @@
-package com.springboot.security.custom.basic.auth.repository;
+package com.springboot.security.custom.basic.auth.dao.provider.app.repository;
 
-import com.springboot.security.custom.basic.auth.entity.UserEntity;
+import com.springboot.security.custom.basic.auth.dao.provider.app.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

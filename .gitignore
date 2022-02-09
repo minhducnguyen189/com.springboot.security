@@ -3,4 +3,5 @@
 
 **/target/**
 
-testdb.mv.db
+*.mv.db
+*.iml
