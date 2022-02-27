@@ -12,6 +12,7 @@
         <module>custom-basic-auth-dao-provider-app</module>
         <module>custom-basic-auth-token-app</module>
         <module>custom-basic-auth-filter-app</module>
+        <module>spring-security-basic</module>
     </modules>
 
     <properties>
