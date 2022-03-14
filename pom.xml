@@ -13,6 +13,7 @@
         <module>custom-basic-auth-token-app</module>
         <module>custom-basic-auth-filter-app</module>
         <module>spring-security-basic</module>
+        <module>custom-basic-spring-security</module>
     </modules>
 
     <properties>
