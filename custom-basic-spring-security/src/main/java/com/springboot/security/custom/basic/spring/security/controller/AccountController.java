@@ -11,7 +11,7 @@ public class AccountController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/v1/accounts/{username}")
     public ResponseEntity<String> getAccountDetails(@PathVariable("username") String username) {
-        return ResponseEntity.ok("This is the account details" + username);
+        return ResponseEntity.ok("This is the account details " + username);
     }
 
 }
