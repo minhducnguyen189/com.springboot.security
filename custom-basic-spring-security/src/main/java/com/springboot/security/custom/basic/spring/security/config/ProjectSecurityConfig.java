@@ -7,9 +7,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+
+import javax.sql.DataSource;
+import java.util.Arrays;
 
 @Configuration
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -44,14 +49,19 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and().passwordEncoder(NoOpPasswordEncoder.getInstance());
 //    }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-        UserDetails user1 = User.withUsername("admin").password("12345").authorities("admin").build();
-        UserDetails user2 = User.withUsername("user").password("12345").authorities("admin").build();
-        userDetailsManager.createUser(user1);
-        userDetailsManager.createUser(user2);
-        auth.userDetailsService(userDetailsManager);
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
+//        UserDetails user1 = User.withUsername("admin").password("12345").authorities("admin").build();
+//        UserDetails user2 = User.withUsername("user").password("12345").authorities("admin").build();
+//        userDetailsManager.createUser(user1);
+//        userDetailsManager.createUser(user2);
+//        auth.userDetailsService(userDetailsManager);
+//    }
+
+    @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
