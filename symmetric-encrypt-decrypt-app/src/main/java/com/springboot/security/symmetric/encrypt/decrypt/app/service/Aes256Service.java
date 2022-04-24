@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Service
-public class EncryptDecryptService {
+public class Aes256Service {
 
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5PADDING";
     private static final String ENCRYPTION_ALGORITHM = "AES";

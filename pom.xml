@@ -15,7 +15,8 @@
         <module>spring-security-basic</module>
         <module>custom-basic-spring-security</module>
         <module>encode-decode-app</module>
-        <module>symmetric-encrypt-descrypt-app</module>
+        <module>symmetric-encrypt-decrypt-app</module>
+        <module>hash-app</module>
     </modules>
 
     <properties>
