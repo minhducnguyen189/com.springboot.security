@@ -13,7 +13,7 @@ import java.security.MessageDigest;
 @Service
 public class Pbkdf2Service {
 
-    private static final String HASH_ALGORITHM_PBKDF2_512 = "PBKDF2WithHmacSHA512";
+    private static final String HASH_ALGORITHM_PBKDF2_512 = SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA512.name();
 
     @Autowired
     private HashConfigProperties hashConfigProperties;
@@ -44,6 +44,12 @@ public class Pbkdf2Service {
         } catch (Exception ex) {
             throw new RuntimeException("Can not hash Data", ex);
         }
+    }
+
+    public enum SecretKeyFactoryAlgorithm {
+
+        PBKDF2WithHmacSHA1, PBKDF2WithHmacSHA256, PBKDF2WithHmacSHA512
+
     }
 
 }
