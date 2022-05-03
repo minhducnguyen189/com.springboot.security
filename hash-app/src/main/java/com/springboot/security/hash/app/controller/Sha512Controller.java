@@ -21,12 +21,12 @@ public class Sha512Controller {
 
     @RequestMapping(method = RequestMethod.POST, path = "v1/cipher/hash/sha512", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> hashSHA512(@RequestBody DataRequest inputData) {
-        return new ResponseEntity<>(hashSha512Service.hashSHA512(inputData.getData()), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.hashSha512Service.hashSHA512(inputData.getData()), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "v1/cipher/hash/sha512/check", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> checkMatchSha512(@RequestBody MatchDataRequest inputData) {
-        return new ResponseEntity<>(hashSha512Service.isSHA512Match(inputData.getRawData(), inputData.getHashedData()), HttpStatus.OK);
+        return new ResponseEntity<>(this.hashSha512Service.isSHA512Match(inputData.getRawData(), inputData.getHashedData()), HttpStatus.OK);
     }
 
 }

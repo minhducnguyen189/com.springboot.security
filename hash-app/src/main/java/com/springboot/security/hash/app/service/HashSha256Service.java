@@ -17,19 +17,24 @@ public class HashSha256Service {
     private HashConfigProperties hashConfigProperties;
 
     public String hashSHA256(String data) {
+        byte[] hash = this.hash(data);
+        return DatatypeConverter.printHexBinary(hash);
+    }
+
+    public boolean isSHA256Match(String data, String hashedData) {
+        byte[] digested = DatatypeConverter.parseHexBinary(hashedData);
+        byte[] reHashData = this.hash(data);
+        return MessageDigest.isEqual(digested, reHashData);
+    }
+
+    private byte[] hash(String data) {
         try {
             String dataWithSalt = hashConfigProperties.getSha256().getSalt().concat(data);
             MessageDigest messageDigest = MessageDigest.getInstance(HASH_ALGORITHM_SHA_256);
-            byte[] hash = messageDigest.digest(dataWithSalt.getBytes(StandardCharsets.UTF_8));
-            return DatatypeConverter.printHexBinary(hash);
+            return messageDigest.digest(dataWithSalt.getBytes(StandardCharsets.UTF_8));
         } catch (Exception ex) {
             throw new RuntimeException("Can not hash Data", ex);
         }
-    }
-
-    public boolean isSHA256Match(String data, String hashData) {
-        String reHashData = this.hashSHA256(data);
-        return reHashData.equals(hashData);
     }
 
 }
