@@ -1,4 +1,9 @@
 
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
 
 hash:
   sha256:
@@ -9,3 +14,5 @@ hash:
     salt: B6FC08FA50377E5E646CAE93C6B12E74F01D6D4E4DAE1F54DA53EB4D340EC75C
     iterations: 185000
     hashWidth: 256
+  bcrypt:
+    strength: 12

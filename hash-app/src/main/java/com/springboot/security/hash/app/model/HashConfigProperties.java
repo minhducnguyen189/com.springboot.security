@@ -12,6 +12,8 @@ public class HashConfigProperties {
 
     private Pbkdf2 pbkdf2;
 
+    private Bcrypt bcrypt;
+
     public Sha256 getSha256() {
         return sha256;
     }
@@ -34,5 +36,13 @@ public class HashConfigProperties {
 
     public void setPbkdf2(Pbkdf2 pbkdf2) {
         this.pbkdf2 = pbkdf2;
+    }
+
+    public Bcrypt getBcrypt() {
+        return bcrypt;
+    }
+
+    public void setBcrypt(Bcrypt bcrypt) {
+        this.bcrypt = bcrypt;
     }
 }
