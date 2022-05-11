@@ -26,7 +26,6 @@ public class BcryptService {
 
     private PasswordEncoder buildPasswordEncoder() {
         SecureRandom random = new SecureRandom();
-        return new BCryptPasswordEncoder(
-                BCryptPasswordEncoder.BCryptVersion.$2A, hashConfigProperties.getBcrypt().getStrength(), random);
+        return new BCryptPasswordEncoder(hashConfigProperties.getBcrypt().getStrength(), random);
     }
 }
