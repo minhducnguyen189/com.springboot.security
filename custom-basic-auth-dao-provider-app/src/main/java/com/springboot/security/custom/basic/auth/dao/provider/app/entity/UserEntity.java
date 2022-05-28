@@ -1,4 +1,4 @@
-package com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.entity;
+package com.springboot.security.custom.basic.auth.dao.provider.app.entity;
 
 import jakarta.validation.constraints.Email;
 import lombok.Getter;

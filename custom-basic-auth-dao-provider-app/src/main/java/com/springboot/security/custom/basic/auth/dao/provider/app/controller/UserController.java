@@ -1,7 +1,7 @@
-package com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.controller;
+package com.springboot.security.custom.basic.auth.dao.provider.app.controller;
 
-import com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.model.UserDto;
-import com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.service.UserServiceHandler;
+import com.springboot.security.custom.basic.auth.dao.provider.app.model.UserDto;
+import com.springboot.security.custom.basic.auth.dao.provider.app.service.UserServiceHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

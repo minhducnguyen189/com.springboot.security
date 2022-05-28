@@ -1,4 +1,4 @@
-package com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.model;
+package com.springboot.security.custom.basic.auth.dao.provider.app.model;
 
 import lombok.Getter;
 import lombok.Setter;

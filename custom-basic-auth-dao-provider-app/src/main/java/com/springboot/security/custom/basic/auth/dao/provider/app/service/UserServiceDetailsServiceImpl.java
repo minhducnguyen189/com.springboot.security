@@ -1,7 +1,7 @@
-package com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.service;
+package com.springboot.security.custom.basic.auth.dao.provider.app.service;
 
-import com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.entity.UserEntity;
-import com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.repository.UserRepository;
+import com.springboot.security.custom.basic.auth.dao.provider.app.entity.UserEntity;
+import com.springboot.security.custom.basic.auth.dao.provider.app.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

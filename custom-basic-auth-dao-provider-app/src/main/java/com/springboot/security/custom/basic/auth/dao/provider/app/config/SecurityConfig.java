@@ -1,6 +1,6 @@
-package com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.config;
+package com.springboot.security.custom.basic.auth.dao.provider.app.config;
 
-import com.springboot.security.custom.basic.spring.security.auth.dao.provider.app.service.UserServiceDetailsServiceImpl;
+import com.springboot.security.custom.basic.auth.dao.provider.app.service.UserServiceDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
