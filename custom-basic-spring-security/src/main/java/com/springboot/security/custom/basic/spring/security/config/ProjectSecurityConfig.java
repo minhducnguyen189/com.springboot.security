@@ -13,9 +13,13 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -32,7 +36,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors()
+                .and().authorizeRequests()
                 .antMatchers("/v1/accounts/**").authenticated()
                 .antMatchers("/v1/balance").authenticated()
                 .antMatchers("/v1/loan").authenticated()
@@ -41,6 +46,17 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v1/notice").permitAll()
                 .and().formLogin()
                 .and().httpBasic();
+    }
+
+    @Bean
+    protected CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
+        corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
+        corsConfiguration.setAllowedMethods(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
     }
 
 //    @Override
