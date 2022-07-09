@@ -3,11 +3,8 @@ package com.springboot.security.custom.basic.spring.security.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "customers")
@@ -21,5 +18,8 @@ public class CustomerEntity {
     private String email;
     private String password;
     private String role;
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    private Set<AuthorityEntity> authorities;
 
 }
