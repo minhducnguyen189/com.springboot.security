@@ -39,6 +39,8 @@ public class CustomerAuthenticationProvider implements AuthenticationProvider {
         List<CustomerEntity> customerEntities = this.customerRepository.findByEmail(username);
         if (customerEntities.size() > 0) {
             if (passwordEncoder.matches(password, customerEntities.get(0).getPassword())) {
+//                List<GrantedAuthority> authorities = new ArrayList<>();
+//                authorities.add(new SimpleGrantedAuthority(customerEntities.get(0).getRole()));
                 return new UsernamePasswordAuthenticationToken(username, password,
                         this.getGrantedAuthorities(customerEntities.get(0).getAuthorities()));
             } else {
