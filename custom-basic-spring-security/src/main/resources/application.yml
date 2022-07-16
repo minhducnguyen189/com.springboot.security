@@ -9,3 +9,8 @@ spring:
     url: jdbc:mysql://localhost:3306/eazybank?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: password
+  jpa:
+    hibernate.ddl-auto: update
+    hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    show-sql: true

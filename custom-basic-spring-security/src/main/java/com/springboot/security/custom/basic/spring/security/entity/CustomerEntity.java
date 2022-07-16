@@ -22,4 +22,7 @@ public class CustomerEntity {
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<AuthorityEntity> authorities;
 
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    private Set<RoleEntity> roles;
+
 }

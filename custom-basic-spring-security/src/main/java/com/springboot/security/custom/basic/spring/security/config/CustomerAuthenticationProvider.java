@@ -2,6 +2,7 @@ package com.springboot.security.custom.basic.spring.security.config;
 
 import com.springboot.security.custom.basic.spring.security.entity.AuthorityEntity;
 import com.springboot.security.custom.basic.spring.security.entity.CustomerEntity;
+import com.springboot.security.custom.basic.spring.security.entity.RoleEntity;
 import com.springboot.security.custom.basic.spring.security.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +42,10 @@ public class CustomerAuthenticationProvider implements AuthenticationProvider {
             if (passwordEncoder.matches(password, customerEntities.get(0).getPassword())) {
 //                List<GrantedAuthority> authorities = new ArrayList<>();
 //                authorities.add(new SimpleGrantedAuthority(customerEntities.get(0).getRole()));
+//                return new UsernamePasswordAuthenticationToken(username, password,
+//                        this.getGrantedAuthorities(customerEntities.get(0).getAuthorities()));
                 return new UsernamePasswordAuthenticationToken(username, password,
-                        this.getGrantedAuthorities(customerEntities.get(0).getAuthorities()));
+                        this.getGrantedAuthorities(customerEntities.get(0).getRoles()));
             } else {
                 throw new BadCredentialsException("Invalid Password");
             }
@@ -50,9 +53,15 @@ public class CustomerAuthenticationProvider implements AuthenticationProvider {
         throw new BadCredentialsException("No user registered with this details");
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(Set<AuthorityEntity> authorityEntities) {
+//    private List<GrantedAuthority> getGrantedAuthorities(Set<AuthorityEntity> authorityEntities) {
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        authorityEntities.forEach(a -> authorities.add(new SimpleGrantedAuthority(a.getAuthority())));
+//        return authorities;
+//    }
+
+    private List<GrantedAuthority> getGrantedAuthorities(Set<RoleEntity> roleEntities) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorityEntities.forEach(a -> authorities.add(new SimpleGrantedAuthority(a.getAuthority())));
+        roleEntities.forEach(a -> authorities.add(new SimpleGrantedAuthority(a.getRole())));
         return authorities;
     }
 
