@@ -1,6 +1,7 @@
 package com.springboot.security.custom.basic.spring.security.config;
 
 import com.springboot.security.custom.basic.spring.security.filter.AuthoritiesLoggingAfterFilter;
+import com.springboot.security.custom.basic.spring.security.filter.AuthoritiesLoggingAtFilter;
 import com.springboot.security.custom.basic.spring.security.filter.RequestValidationBeforeFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +38,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().cors()
                 .and().addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+                .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/v1/user").authenticated()
 //                .antMatchers("/v1/accounts/**").authenticated()
