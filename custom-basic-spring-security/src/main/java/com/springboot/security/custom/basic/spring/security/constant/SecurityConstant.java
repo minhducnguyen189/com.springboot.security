@@ -2,10 +2,11 @@ package com.springboot.security.custom.basic.spring.security.constant;
 
 public class SecurityConstant {
 
-    public static String AUTHORIZATION_HEADER = "Authorization";
-    public static String BEARER_PREFIX = "Bearer ";
-    public static String CLAIM_USERNAME = "username";
-    public static String CLAIM_AUTHORITIES = "authorities";
-    public static String SUBJECT = "JWT";
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String BEARER_PREFIX = "Bearer ";
+    public static final String CLAIM_USERNAME = "username";
+    public static final String CLAIM_AUTHORITIES = "authorities";
+    public static final String ISSUER = "2D Garden";
+    public static final String SUBJECT = "JWT";
 
 }
