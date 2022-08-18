@@ -3,9 +3,11 @@ package com.springboot.security.custom.basic.spring.security.filter;
 import com.springboot.security.custom.basic.spring.security.constant.SecurityConstant;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
@@ -17,24 +19,28 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+@Component
 public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
+
+    @Value("${security.secret}")
+    private String secret;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (Objects.nonNull(authentication)) {
-            SecretKey key = Keys.hmacShaKeyFor(SecurityConstant.SECRET.getBytes(StandardCharsets.UTF_8));
+            SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
             Date now = new Date();
             String jwt = Jwts.builder()
                     .setIssuer(authentication.getName())
-                    .setSubject("JWT")
-                    .claim("username", authentication.getName())
-                    .claim("authorities", this.getAuthorityString(authentication.getAuthorities()))
+                    .setSubject(SecurityConstant.SUBJECT)
+                    .claim(SecurityConstant.CLAIM_USERNAME, authentication.getName())
+                    .claim(SecurityConstant.CLAIM_AUTHORITIES, this.getAuthorityString(authentication.getAuthorities()))
                     .setIssuedAt(now)
                     .setExpiration(new Date(now.getTime() + 30000))
                     .signWith(key)
                     .compact();
-            response.setHeader("Authorization", jwt);
+            response.setHeader(SecurityConstant.AUTHORIZATION_HEADER, jwt);
         }
         filterChain.doFilter(request, response);
     }

@@ -1,6 +1,8 @@
 package com.springboot.security.custom.basic.spring.security.config;
 
+import com.springboot.security.custom.basic.spring.security.constant.SecurityConstant;
 import com.springboot.security.custom.basic.spring.security.filter.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +20,11 @@ import java.util.Collections;
 
 @Configuration
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private JwtTokenGeneratorFilter jwtTokenGeneratorFilter;
+    @Autowired
+    private JwtTokenValidatorFilter jwtTokenValidatorFilter;
 
     /**
      *
@@ -39,8 +46,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().cors()
                 .and().addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JwtTokenValidatorFilter(), BasicAuthenticationFilter.class)
-                .addFilterAfter(new JwtTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(jwtTokenValidatorFilter, BasicAuthenticationFilter.class)
+                .addFilterAfter(jwtTokenGeneratorFilter, BasicAuthenticationFilter.class)
                 .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/v1/user").authenticated()
@@ -72,7 +79,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
         corsConfiguration.setAllowedOriginPatterns(Collections.singletonList("*"));
         corsConfiguration.setAllowedMethods(Collections.singletonList("*"));
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setExposedHeaders(Collections.singletonList("Authorization"));
+        corsConfiguration.setExposedHeaders(Collections.singletonList(SecurityConstant.AUTHORIZATION_HEADER));
         corsConfiguration.setMaxAge(3600L);
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
