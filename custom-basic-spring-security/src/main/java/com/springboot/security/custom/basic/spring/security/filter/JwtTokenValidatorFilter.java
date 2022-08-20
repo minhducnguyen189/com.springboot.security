@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class JwtTokenValidatorFilter extends OncePerRequestFilter {
 
-    @Value("${security.secret}")
+    @Value("${security.token.secret}")
     private String secret;
 
     @Override

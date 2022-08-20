@@ -22,6 +22,12 @@ import java.util.Collections;
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private AuthoritiesLoggingAfterFilter authoritiesLoggingAfterFilter;
+    @Autowired
+    private AuthoritiesLoggingAtFilter authoritiesLoggingAtFilter;
+    @Autowired
+    private RequestValidationBeforeFilter requestValidationBeforeFilter;
+    @Autowired
     private JwtTokenGeneratorFilter jwtTokenGeneratorFilter;
     @Autowired
     private JwtTokenValidatorFilter jwtTokenValidatorFilter;
@@ -44,11 +50,11 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoringAntMatchers("/v1/user")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and().cors()
-                .and().addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
-                .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+                .and().addFilterBefore(requestValidationBeforeFilter, BasicAuthenticationFilter.class)
+                .addFilterAfter(authoritiesLoggingAfterFilter, BasicAuthenticationFilter.class)
                 .addFilterBefore(jwtTokenValidatorFilter, BasicAuthenticationFilter.class)
                 .addFilterAfter(jwtTokenGeneratorFilter, BasicAuthenticationFilter.class)
-                .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
+                .addFilterAt(authoritiesLoggingAtFilter, BasicAuthenticationFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/v1/user").authenticated()
 //                .antMatchers("/v1/accounts/**").authenticated()

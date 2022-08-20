@@ -1,5 +1,6 @@
 package com.springboot.security.custom.basic.spring.security.filter;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.StringUtils;
 
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 
+@Component
 public class RequestValidationBeforeFilter implements Filter {
 
     private static final String AUTHORIZATION_HEADER = "Authorization";

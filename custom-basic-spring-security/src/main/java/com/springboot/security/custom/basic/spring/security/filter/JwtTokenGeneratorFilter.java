@@ -22,8 +22,10 @@ import java.util.*;
 @Component
 public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
 
-    @Value("${security.secret}")
+    @Value("${security.token.secret}")
     private String secret;
+    @Value("${security.token.timeout}")
+    private Long timeout;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -37,7 +39,7 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
                     .claim(SecurityConstant.CLAIM_USERNAME, authentication.getName())
                     .claim(SecurityConstant.CLAIM_AUTHORITIES, this.getAuthorityString(authentication.getAuthorities()))
                     .setIssuedAt(now)
-                    .setExpiration(new Date(now.getTime() + 30000))
+                    .setExpiration(new Date(now.getTime() + timeout))
                     .signWith(key)
                     .compact();
             response.setHeader(SecurityConstant.AUTHORIZATION_HEADER, jwt);
