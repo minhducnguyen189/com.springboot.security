@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,5 +25,8 @@ public class CustomerEntity {
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<RoleEntity> roles;
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    private List<LoanEntity> loans;
 
 }
