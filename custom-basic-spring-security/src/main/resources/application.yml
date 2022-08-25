@@ -18,7 +18,7 @@ spring:
 security:
   token:
     secret: 2472B08201704D96A5844807E43BA02A9E0CCA945381123A82B1DD4E852B9325
-    timeout: 30000
+    timeout: 300000
 
 logging:
   level:

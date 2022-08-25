@@ -4,6 +4,8 @@ import com.springboot.security.custom.basic.spring.security.model.Loan;
 import com.springboot.security.custom.basic.spring.security.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +24,9 @@ public class LoanController {
         return ResponseEntity.ok("This is the loan details");
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/v1/loan/customer/{customerId}")
-    public ResponseEntity<List<Loan>> getLoansByCustomerId(@PathParam("customerId") Integer customerId) {
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(method = RequestMethod.GET, path = "/v1/loan/customers/{customerId}")
+    public ResponseEntity<List<Loan>> getLoansByCustomerId(@PathVariable("customerId") Integer customerId) {
         return ResponseEntity.ok(this.loanService.getLoans(customerId));
     }
 
