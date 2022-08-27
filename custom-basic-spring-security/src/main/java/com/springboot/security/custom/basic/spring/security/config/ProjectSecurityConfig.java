@@ -48,6 +48,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf()
 //        http.csrf()
                 .ignoringAntMatchers("/v1/user")
+                .ignoringAntMatchers("/v1/contact")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and().cors()
                 .and().addFilterBefore(requestValidationBeforeFilter, BasicAuthenticationFilter.class)
