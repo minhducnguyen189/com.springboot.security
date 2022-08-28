@@ -23,4 +23,8 @@ public class ContactEntity {
 
     private String message;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
+
 }
