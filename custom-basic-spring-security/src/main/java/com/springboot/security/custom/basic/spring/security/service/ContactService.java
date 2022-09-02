@@ -4,7 +4,11 @@ import com.springboot.security.custom.basic.spring.security.entity.ContactEntity
 import com.springboot.security.custom.basic.spring.security.model.Contact;
 import com.springboot.security.custom.basic.spring.security.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ContactService {
@@ -12,15 +16,43 @@ public class ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
-    public Contact createContact(Contact contact) {
-        ContactEntity contactEntity = new ContactEntity();
-        contactEntity.setContactEmail(contact.getContactEmail());
-        contactEntity.setContactName(contact.getContactName());
-        contactEntity.setSubject(contact.getSubject());
-        contactEntity.setMessage(contact.getMessage());
-        contactEntity = this.contactRepository.save(contactEntity);
-        contact.setId(contactEntity.getId());
-        return contact;
+    public List<Contact> createContacts(List<Contact> contacts) {
+        List<ContactEntity> contactEntities = this.toContactEntities(contacts);
+        contactEntities = this.contactRepository.saveAll(contactEntities);
+        return this.toContacts(contactEntities);
+    }
+
+    private List<ContactEntity> toContactEntities(List<Contact> contacts) {
+        List<ContactEntity> contactEntities = new ArrayList<>();
+        contacts.forEach(c -> {
+            ContactEntity contactEntity = new ContactEntity();
+            contactEntity.setContactEmail(c.getContactEmail());
+            contactEntity.setContactName(c.getContactName());
+            contactEntity.setSubject(c.getSubject());
+            contactEntity.setMessage(c.getMessage());
+            contactEntities.add(contactEntity);
+        });
+        return contactEntities;
+    }
+
+    @PostFilter("filterObject.contactName == 'Han'")
+    public List<Contact> getContacts() {
+        List<ContactEntity> contactEntities = this.contactRepository.findAll();
+        return this.toContacts(contactEntities);
+    }
+
+    private List<Contact> toContacts(List<ContactEntity> contactEntities) {
+        List<Contact> contacts = new ArrayList<>();
+        contactEntities.forEach(c -> {
+            Contact contact = new Contact();
+            contact.setId(c.getId());
+            contact.setContactName(c.getContactName());
+            contact.setContactEmail(c.getContactEmail());
+            contact.setSubject(c.getSubject());
+            contact.setMessage(c.getMessage());
+            contacts.add(contact);
+        });
+        return contacts;
     }
 
 }

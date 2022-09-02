@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class ContactController {
 
@@ -23,10 +25,14 @@ public class ContactController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/v1/contact")
-    @PreFilter("filterObject.contactName == 'Han'")
-    @PostFilter("filterObject.subject == 'Hello'")
-    public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
-        return ResponseEntity.ok(this.contactService.createContact(contact));
+    @PreFilter("filterObject.subject == 'Hello'")
+    public ResponseEntity<List<Contact>> createContact(@RequestBody List<Contact> contacts) {
+        return ResponseEntity.ok(this.contactService.createContacts(contacts));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/v1/contacts")
+    public ResponseEntity<List<Contact>> getContacts() {
+        return ResponseEntity.ok(this.contactService.getContacts());
     }
 
 }

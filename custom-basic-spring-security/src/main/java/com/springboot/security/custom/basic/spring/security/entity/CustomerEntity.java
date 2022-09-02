@@ -29,7 +29,4 @@ public class CustomerEntity {
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<LoanEntity> loans;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    private List<ContactEntity> contacts;
-
 }
