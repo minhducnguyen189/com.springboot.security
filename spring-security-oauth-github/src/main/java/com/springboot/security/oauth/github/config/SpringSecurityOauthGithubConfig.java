@@ -1,5 +1,6 @@
 package com.springboot.security.oauth.github.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SpringSecurityOauthGithubConfig {
+
+    @Value("${github.oauth2.client.id}")
+    private String clientId;
+
+    @Value("${github.oauth2.client.secret}")
+    private String clientSecret;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -26,8 +33,8 @@ public class SpringSecurityOauthGithubConfig {
     private ClientRegistration clientRegistration() {
         return CommonOAuth2Provider.GITHUB
                 .getBuilder("github")
-                .clientId("c224cc2eb828c3ba811c")
-                .clientSecret("7515f35ceb176a13911efa24f85238ff2d8e1d4c")
+                .clientId(this.clientId)
+                .clientSecret(this.clientSecret)
                 .build();
     }
 
