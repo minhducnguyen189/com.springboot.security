@@ -43,7 +43,7 @@ public class SpringSecurityOauthGithubConfig2 {
                 .userNameAttributeName("id")
                 .clientName("GitHub")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .registrationId("{baseUrl}/{action}/oauth2/code/{registrationId}")
+                .redirectUri("{baseUrl}/{action}/oauth2/code/{registrationId}")
                 .build();
     }
 

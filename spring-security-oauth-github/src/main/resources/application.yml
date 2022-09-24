@@ -5,9 +5,8 @@ spring:
       client:
         registration:
           github:
-            client:
-              id: c224cc2eb828c3ba811c
-              secret: 7515f35ceb176a13911efa24f85238ff2d8e1d4c
+            client-id: c224cc2eb828c3ba811c
+            client-secret: 7515f35ceb176a13911efa24f85238ff2d8e1d4c
 
 github:
   oauth2:
