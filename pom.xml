@@ -18,6 +18,7 @@
         <module>symmetric-encrypt-decrypt-app</module>
         <module>hash-app</module>
         <module>spring-security-oauth-github</module>
+        <module>spring-security-basic-custom</module>
     </modules>
 
     <properties>
