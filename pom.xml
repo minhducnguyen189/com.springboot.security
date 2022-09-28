@@ -21,6 +21,7 @@
         <module>spring-security-basic-custom</module>
         <module>spring-security-inMemoryAuthentication</module>
         <module>spring-security-inMemoryUserDetailsManager</module>
+        <module>spring-security-jdbcUserDetailsManager</module>
     </modules>
 
     <properties>
