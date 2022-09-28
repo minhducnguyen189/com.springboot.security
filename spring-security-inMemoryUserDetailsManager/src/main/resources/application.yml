@@ -1,0 +1,11 @@
+
+#spring:
+#  security:
+#    user:
+#      name: user
+#      password: 12345
+#
+#server:
+#  servlet:
+#    session:
+#      timeout: 1m

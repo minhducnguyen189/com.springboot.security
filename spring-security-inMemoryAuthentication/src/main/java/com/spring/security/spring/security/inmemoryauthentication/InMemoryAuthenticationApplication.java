@@ -5,9 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringSecurityBasicCustomApplication {
+public class InMemoryAuthenticationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringSecurityBasicCustomApplication.class, args);
+        SpringApplication.run(InMemoryAuthenticationApplication.class, args);
     }
 }
