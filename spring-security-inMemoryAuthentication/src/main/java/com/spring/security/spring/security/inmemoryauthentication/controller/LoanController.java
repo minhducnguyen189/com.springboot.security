@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoanController {
 
-
-    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.GET, path = "/v1/loan")
     public ResponseEntity<String> getLoanDetail() {
         return ResponseEntity.ok("This is the loan details");
