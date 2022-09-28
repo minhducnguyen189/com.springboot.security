@@ -25,6 +25,7 @@
         <module>spring-security-custom-userDetailsService</module>
         <module>spring-security-bCryptPasswordEncoder</module>
         <module>spring-security-custom-authenticationProvider</module>
+        <module>spring-security-cors</module>
     </modules>
 
     <properties>
