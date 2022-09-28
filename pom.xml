@@ -23,6 +23,7 @@
         <module>spring-security-inMemoryUserDetailsManager</module>
         <module>spring-security-jdbcUserDetailsManager</module>
         <module>spring-security-custom-userDetailsService</module>
+        <module>spring-security-bCryptPasswordEncoder</module>
     </modules>
 
     <properties>
