@@ -1,0 +1,17 @@
+
+#spring:
+#  security:
+#    user:
+#      name: user
+#      password: 12345
+#
+#server:
+#  servlet:
+#    session:
+#      timeout: 1m
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/worldbank?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: password

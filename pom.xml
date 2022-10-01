@@ -29,6 +29,7 @@
         <module>spring-security-csrf</module>
         <module>spring-security-configure-authorities</module>
         <module>spring-security-configure-roles</module>
+        <module>spring-security-filters</module>
     </modules>
 
     <properties>
