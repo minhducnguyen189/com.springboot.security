@@ -30,6 +30,7 @@
         <module>spring-security-configure-authorities</module>
         <module>spring-security-configure-roles</module>
         <module>spring-security-filters</module>
+        <module>spring-security-jwt</module>
     </modules>
 
     <properties>
