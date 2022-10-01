@@ -28,6 +28,7 @@
         <module>spring-security-cors</module>
         <module>spring-security-csrf</module>
         <module>spring-security-configure-authorities</module>
+        <module>spring-security-configure-roles</module>
     </modules>
 
     <properties>
