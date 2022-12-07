@@ -10,6 +10,9 @@
 #    session:
 #      timeout: 1m
 
+server:
+  port: 8084
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/worldbank?useUnicode=true&characterEncoding=UTF-8

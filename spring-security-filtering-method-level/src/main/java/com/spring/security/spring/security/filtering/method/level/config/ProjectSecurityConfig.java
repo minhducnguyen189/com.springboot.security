@@ -2,8 +2,6 @@ package com.spring.security.spring.security.filtering.method.level.config;
 
 import com.spring.security.spring.security.filtering.method.level.constant.SecurityConstant;
 import com.spring.security.spring.security.filtering.method.level.filter.*;
-import com.spring.security.spring.security.jwt.filter.*;
-import com.spring.security.spring.security.level.filter.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
