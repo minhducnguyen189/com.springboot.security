@@ -1,0 +1,31 @@
+
+server:
+  port: 8086
+
+spring:
+  security:
+    oauth2:
+      url: http://localhost:8087
+      client:
+        registration:
+          keycloak: # <--- It's your custom client. I am using keycloak
+            client-id: passwordgrant
+            authorization-grant-type: password
+            scope: openid, address, email, profile # your scopes
+            username: user
+            password: user
+        provider:
+          keycloak: # <--- Here Registered my custom provider
+            authorization-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/token
+
+
+logging:
+  level:
+    com.springboot.cloud.openfeign.client.credentials.interceptor.api: DEBUG
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full

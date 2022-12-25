@@ -34,6 +34,7 @@
         <module>spring-security-filtering-method-level</module>
         <module>spring-security-oauth-resource-server-client-credentials-grant-type</module>
         <module>spring-security-oauth-resource-server-code-grant-type</module>
+        <module>spring-security-oauth-client-server-password-grant-type</module>
     </modules>
 
     <properties>
