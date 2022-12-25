@@ -1,4 +1,4 @@
-package com.springboot.sprint.security.oauth.client.credentials.grant.type.constant;
+package com.springboot.sprint.security.oauth.resource.server.client.credentials.grant.type.constant;
 
 public class SecurityConstant {
 

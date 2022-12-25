@@ -1,4 +1,4 @@
-package com.springboot.sprint.security.oauth.client.credentials.grant.type.controller;
+package com.springboot.sprint.security.oauth.resource.server.client.credentials.grant.type.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

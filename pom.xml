@@ -32,7 +32,7 @@
         <module>spring-security-jwt</module>
         <module>spring-security-invocation-method-level</module>
         <module>spring-security-filtering-method-level</module>
-        <module>spring-security-oauth-client-credentials-grant-type</module>
+        <module>spring-security-oauth-resource-server-client-credentials-grant-type</module>
         <module>spring-security-oauth-resource-server-code-grant-type</module>
     </modules>
 

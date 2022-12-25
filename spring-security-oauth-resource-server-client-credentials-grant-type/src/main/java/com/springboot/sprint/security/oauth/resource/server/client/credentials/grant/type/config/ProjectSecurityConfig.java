@@ -1,6 +1,6 @@
-package com.springboot.sprint.security.oauth.client.credentials.grant.type.config;
+package com.springboot.sprint.security.oauth.resource.server.client.credentials.grant.type.config;
 
-import com.springboot.sprint.security.oauth.client.credentials.grant.type.constant.SecurityConstant;
+import com.springboot.sprint.security.oauth.resource.server.client.credentials.grant.type.constant.SecurityConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

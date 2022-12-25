@@ -1,4 +1,4 @@
-package com.springboot.sprint.security.oauth.client.credentials.grant.type.config;
+package com.springboot.sprint.security.oauth.resource.server.client.credentials.grant.type.config;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
