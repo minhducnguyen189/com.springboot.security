@@ -22,7 +22,7 @@ spring:
 
 logging:
   level:
-    com.springboot.cloud.openfeign.client.credentials.interceptor.api: DEBUG
+    com.springboot.security.spring.security.oauth.client.server.password.grant.type.api: DEBUG
 
 feign:
   client:
