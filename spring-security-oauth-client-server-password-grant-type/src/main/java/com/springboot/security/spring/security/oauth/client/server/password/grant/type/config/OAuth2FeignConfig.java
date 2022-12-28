@@ -50,8 +50,6 @@ public class OAuth2FeignConfig {
 
         AuthorizedClientServiceOAuth2AuthorizedClientManager authorizedClientManager =
                 new AuthorizedClientServiceOAuth2AuthorizedClientManager(clientRegistrationRepository, authorizedClientService);
-        authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
-
 
         authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
         authorizedClientManager.setContextAttributesMapper(oAuth2AuthorizeRequest -> {
