@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-security-oauth-resource-server-github</artifactId>
+    <artifactId>spring-security-oauth-resource-server-code-grant-type</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
