@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <version>1.0-SNAPSHOT</version>
 
-    <artifactId>symmetric-encrypt-descrypt-app</artifactId>
+    <artifactId>symmetric-encrypt-decrypt-app</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
